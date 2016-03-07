@@ -13,7 +13,7 @@ Usage:
 Options:
   --help     Show this screen.
   --version     Show version.
-  --upsert      Use Upsert
+  --upsert      Use ReplaceOne operations with upsert=True for inserting.
   --db
   --batchSize=<bs>  the batch size [default: 1000]
   --host=<host:port>  mongo instance  [default: localhost]
