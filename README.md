@@ -1,6 +1,5 @@
-===============================
 tymongoimport
-===============================
+-------------
 
 Almost a drop-in  replacement for mongoimport using the PyMongo and supporting only jsonl files
 
@@ -42,8 +41,3 @@ Requirements
 - Python >= 2.6 or >= 3.3
 - docopt
 - pymongo >= 3.2
-
-License
--------
-
-MIT licensed. See the bundled `LICENSE <https://github.com/trustyou/tymongoimport/blob/master/LICENSE>`_ file for more details.
