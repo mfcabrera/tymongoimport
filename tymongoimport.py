@@ -19,7 +19,7 @@ Options:
   --host=<host:port>  mongo instance  [default: localhost]
   --user=<user>  the user with write access to the database
   --password=<passwd>  the password for authentication
-  --authenticationDatabase=<authdb>  the database to perform the authentication to  [default: admin]
+  --authenticationDatabase=<authdb>  the database to perform the authentication to
    --database=<db>  the target database  [default: test]
 '''
 
@@ -109,6 +109,16 @@ def handle_bulk_errors(bwe):
             break
 
 
+def get_mongo_database(host, user, password, database, auth_db=None):
+
+    client = pymongo.MongoClient(host=host)
+
+    if auth_db:  # Authenticate with database if authdb specified
+        db = client[auth_db]
+        if not db.authenticate(user, password):
+            raise Exception("Cannot authenticate with Database: Index creation failed")
+
+    return client[database]
 
 def main():
     '''Main entry point for the tymongoimport CLI.'''
@@ -120,23 +130,27 @@ def main():
     )
 
     args = docopt(__doc__, version=__version__)
-    logging.info(args)
 
     # Extract parameters
     db_name = args['--database']
     host = args['--host']
     collection = args["--collection"]
+    user = args['--user']
+    password = args['--password']
+    auth_db = args['--authenticationDatabase']
     batchSize = int(args["--batchSize"])
 
     # Insertion modes
     insert_mode = MongoBulkUpdater.insertion_mode_from_args(args)
-
     log_str = "Connectiong to '{}' writing to database: '{}' in collection '{}'"
     logging.info(log_str.format(host, db_name, collection))
 
-    client = pymongo.MongoClient(host=host)
-    db = client[db_name]
+    try:
+        db = get_mongo_database(host, user, password, db_name, auth_db)
+    except Exception as e:
+        logging.error("Cannot stablish a connecton with the server: {}".format(e))
 
+    # Start generating the bulk writes
     writer = MongoBulkUpdater(db, collection, insert_mode)
 
     stats = Counter()

@@ -2,7 +2,7 @@
 tymongoimport
 ===============================
 
-A replacement for mongoimport using the API and supporting only jsonl files
+Almost a drop-in  replacement for mongoimport using the PyMongo and supporting only jsonl files
 
 Features
 --------
