@@ -20,7 +20,9 @@ Options:
   --user=<user>  the user with write access to the database
   --password=<passwd>  the password for authentication
   --authenticationDatabase=<authdb>  the database to perform the authentication to
-   --database=<db>  the target database  [default: test]
+  --database=<db>  the target database  [default: test]
+  --collection=<col>  the target collection  [default: test]
+
 '''
 
 from __future__ import print_function, unicode_literals
@@ -120,13 +122,14 @@ def get_mongo_database(host, user, password, database, auth_db=None):
 
     return client[database]
 
+
 def main():
     '''Main entry point for the tymongoimport CLI.'''
 
     logging.basicConfig(
         stream=sys.stderr,
         level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        format='%(asctime)s - %(module)s - %(levelname)s - %(message)s'
     )
 
     args = docopt(__doc__, version=__version__)
@@ -167,7 +170,6 @@ def main():
         except BulkWriteError as bwe:
             handle_bulk_errors(bwe)
             exit(-1)
-
 
     for i, line in enumerate(stdin):
         buffer.append(line)
