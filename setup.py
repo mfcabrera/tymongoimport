@@ -3,11 +3,13 @@ import re
 import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
+from pip.req import parse_requirements
 
+# parse_requirements() returns generator of pip.req.InstallRequirement objects
+install_reqs = parse_requirements('requirements.txt', session=False)
 
-REQUIRES = [
-    'docopt',
-]
+REQUIRES = [str(ir.req) for ir in install_reqs]
+
 
 class PyTest(TestCommand):
     def finalize_options(self):
@@ -49,7 +51,7 @@ setup(
     name='tymongoimport',
     version="0.1.0",
     description='A replacement for mongoimport using the API and supporting only jsonl files',
-    long_description=read("README.rst"),
+    long_description=read("README.md"),
     author='Miguel Cabrera',
     author_email='miguel.cabrera@trustyou.net',
     url='https://github.com/mfcabrera/tymongoimport',
