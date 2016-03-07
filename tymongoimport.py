@@ -166,7 +166,11 @@ def main():
             stats['modified'] += r.modified_count
             stats['upserted'] += r.upserted_count
 
-            logging.info("Upserted/Inserted so far {} documents".format(stats['inserted'] + stats['upserted'] + stats['modified']))
+            logging.info(
+                "Upserted/Inserted so far {} documents".format(
+                    stats['inserted'] + stats['upserted'] + stats['modified']
+                )
+            )
         except BulkWriteError as bwe:
             handle_bulk_errors(bwe)
             exit(-1)
