@@ -4,7 +4,7 @@
  (Almost) a drop-in replacement for Mongoimport
 
 Usage:
-  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>] [--database=<db>] [--collection=<col>]
+  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>] [--database=<db>] [--collection=<col>] [--stopOnError] [--numInsertionWorkers=<iw>]
   tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>] [--database=<db>] [--collection=<col>]  (--user=<user> --password=<passwd>)
   tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>]  [--database=<db>] [--collection=<col>] (--user=<user> --password=<passwd> --authenticationDatabase=<authdb>)
   tymongoimport --help
@@ -22,6 +22,8 @@ Options:
   --authenticationDatabase=<authdb>  the database to perform the authentication to
   --database=<db>  the target database  [default: test]
   --collection=<col>  the target collection  [default: test]
+  --stopOnError  for compatibility
+  --numInsertionWorkers=<iw>  for compatibility [default: 1]
 
 '''
 
