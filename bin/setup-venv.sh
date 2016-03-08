@@ -15,7 +15,8 @@ virtualenv $VENV_DIR
 pip install -r requirements.txt
 
 # reinstall ty.social_radar to make sure that the latest code is running
-if [ `pip freeze | grep ty.social_radar | wc -l` -eq 1 ]; then
+if [ `pip freeze | grep tymongoimport | wc -l` -eq 1 ]; then
 	pip uninstall --yes tymongoimport
 fi
+
 pip install .

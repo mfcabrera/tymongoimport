@@ -9,8 +9,5 @@ dev-venv:
 
 install: venv migrate
 
-flake8:
-	flake8 ty/
-
 clean:
 	rm -rf venv/
