@@ -7,7 +7,7 @@ migrate: venv
 dev-venv:
 	pip install -r dev-requirements.txt
 
-install: venv migrate
+install: venv migrate dev-venv
 	pip install .
 
 clean:
