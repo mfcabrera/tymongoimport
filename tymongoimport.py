@@ -4,9 +4,9 @@
  (Almost) a drop-in replacement for Mongoimport
 
 Usage:
-  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>] [--database=<db>] [--collection=<col>] [--stopOnError] [--numInsertionWorkers=<iw>]
-  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>] [--database=<db>] [--collection=<col>]  (--user=<user> --password=<passwd>)
-  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>]  [--database=<db>] [--collection=<col>] (--user=<user> --password=<passwd> --authenticationDatabase=<authdb>)
+  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>] [--db=<db>] [--collection=<col>] [--stopOnError] [--numInsertionWorkers=<iw>]
+  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>] [--db=<db>] [--collection=<col>]  (--username=<user> --password=<passwd>) [--stopOnError] [--numInsertionWorkers=<iw>]
+  tymongoimport [--batchSize=<bs>] [--upsert | --find-replace] [--host=<host:port>]  [--db=<db>] [--collection=<col>] (--username=<user> --password=<passwd> --authenticationDatabase=<authdb>) [--stopOnError] [--numInsertionWorkers=<iw>]
   tymongoimport --help
   tymongoimport --version
 
@@ -14,13 +14,12 @@ Options:
   --help     Show this screen.
   --version     Show version.
   --upsert      Use ReplaceOne operations with upsert=True for inserting.
-  --db
   --batchSize=<bs>  the batch size [default: 1000]
   --host=<host:port>  mongo instance  [default: localhost]
-  --user=<user>  the user with write access to the database
+  --username=<user>  the user with write access to the database
   --password=<passwd>  the password for authentication
   --authenticationDatabase=<authdb>  the database to perform the authentication to
-  --database=<db>  the target database  [default: test]
+  --db=<db>  the target database  [default: test]
   --collection=<col>  the target collection  [default: test]
   --stopOnError  for compatibility
   --numInsertionWorkers=<iw>  for compatibility [default: 1]
@@ -137,10 +136,10 @@ def main():
     args = docopt(__doc__, version=__version__)
 
     # Extract parameters
-    db_name = args['--database']
+    db_name = args['--db']
     host = args['--host']
     collection = args["--collection"]
-    user = args['--user']
+    user = args['--username']
     password = args['--password']
     auth_db = args['--authenticationDatabase']
     batchSize = int(args["--batchSize"])
