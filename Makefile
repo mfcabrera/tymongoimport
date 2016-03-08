@@ -8,6 +8,7 @@ dev-venv:
 	pip install -r dev-requirements.txt
 
 install: venv migrate
+	pip install .
 
 clean:
 	rm -rf venv/

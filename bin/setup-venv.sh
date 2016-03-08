@@ -18,5 +18,3 @@ pip install -r requirements.txt
 if [ `pip freeze | grep tymongoimport | wc -l` -eq 1 ]; then
 	pip uninstall --yes tymongoimport
 fi
-
-pip install .
