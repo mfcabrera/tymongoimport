@@ -39,7 +39,7 @@ from pymongo import ReplaceOne, InsertOne
 from pymongo.errors import BulkWriteError
 from collections import Counter
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Miguel Cabrera"
 __license__ = "MIT"
 
@@ -134,7 +134,7 @@ def main():
     )
 
     args = docopt(__doc__, version=__version__)
-
+    #logging.info(args)
     # Extract parameters
     db_name = args['--db']
     host = args['--host']
